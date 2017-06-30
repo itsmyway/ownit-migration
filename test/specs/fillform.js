@@ -1,8 +1,9 @@
 var webdriverio = require('webdriverio'),
-  should = require('should');
+    should = require('should');
 
 const fs = require("fs");
 const path = require("path");
+
 
 // a test script block or suite
 describe('Form Field Test for Web Driver IO - Tutorial Test Page Website', function() {
@@ -49,28 +50,19 @@ describe('Form Field Test for Web Driver IO - Tutorial Test Page Website', funct
   //https://github.com/onewithhammer/web-driver-io-tutorial/blob/master/dataLoopExample2-wdio.js
   // Set the email to valid1@user.com
   it('should set email to valid1@user.com', function () {
-    driver.setValue("#ius-email", "valid1@user.com")
-    console.log(driver.element('#ius-email'));
-    // driver.selectorExecute('#ius-email', function(el){
-    //   el[0].blur();
-    // });
-    return driver.pause(5000)
-        .call(() => {
-          console.log("Paused and Executed");
-    })
-    // browser.waitUntil(function () {
-    //     try {
-    //         return !!body.element('[data-jiis="cc"]').value;
-    //     } catch (e) {
-    //         return false;
-    //     }
-    // }, 5000, );
-    // console.log(driver.element('#ius-email'));
-    // return driver.setValue("#ius-email", "valid1@user.com")
-    //   .getValue("#ius-email").then( function (e) {
-    //     console.log("Email: " + e);
-    //     //(e).should.be.equal("valid1@user.com");
-    //   });
+    return driver.setValue("#ius-email", "valid1@user.com").then((e) => {
+      console.log(" Email ID Just blurred");
+      return driver.click('#ius-password').then(function(e){
+        console.log("After Email ID blurred");
+        return driver.pause(5000).then((e) => {
+          console.log("PAUSED")
+          return driver.getValue('#ius-email-message-text').then((e) => {
+            console.log('DOne')
+            //(e).should.be.equal("This user ID is already taken.");
+          })
+        })
+      })
+    });
   });
 
   // Set the password to Intuit17@
@@ -91,16 +83,20 @@ describe('Form Field Test for Web Driver IO - Tutorial Test Page Website', funct
       });
   });
 
-  // Submit form and wait for search results
+  //Submit form and wait for search results
   it('should submit form and wait for results', function () {
-    return driver.submitForm("#ius-form-sign-up").then( function(e) {
-
-      console.log('Submit Search Form');
+    return driver.click("#ius-form-sign-up").then( function(e) {
+         console.log('Submit Search Form',e);
+        // return new Promise((resolve, reject) => {
+        //
+        // })
       })
       // .waitForVisible("#search-results", 10000).then(function (e) {
       //   console.log('Search Results Found');
       // });
   });
+
+
 
   // a "hook" to run after all tests in this block
 	after(function() {

@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "wdio",
-    "test-m": "./node_modules/mocha/bin/mocha"
+    "test": "wdio"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "asyncawait": "^1.0.6",
     "mocha": "^3.4.2",
     "should": "^11.2.1",
     "wdio-firefox-profile-service": "0.0.3",
