@@ -1,10 +1,6 @@
-const appRoot = "/Users/aharibabu/git_repo/Personal/ownit-migration/node_modules/@sbgm/picante/"
 exports.config = {
-  "before": function () {
-      require(appRoot + "/utilities")(browser, appRoot, __dirname)
-    },
   "specs": [
-    "/Users/aharibabu/git_repo/Personal/ownit-migration/test/sampleTest.js"
+    './test/specs/**/*.js'
   ],
   "exclude": [],
   "sync": true,
